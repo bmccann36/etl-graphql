@@ -1,0 +1,55 @@
+
+service: etl-graphql # NOTE: update this with your service name
+
+custom:
+  env_src: ${opt:env_src, 'default'}
+  serverless-offline:
+    port: 4000
+  
+provider:
+  name: aws
+  runtime: nodejs8.10
+  environment: ${file(env.yml):${self:custom.env_src}}
+  
+plugins:
+  - serverless-offline
+
+# you can add packaging information here
+#package:
+#  include:
+#    - include-me.js
+#    - include-me-dir/**
+#  exclude:
+#    - exclude-me.js
+#    - exclude-me-dir/**
+
+functions:
+
+  graphQlHandler:
+    handler: graphQlServer/gqlHandler.main
+    events:
+    - http:
+        path: graphql
+        method: post
+        cors: true
+    - http:
+        path: graphql
+        method: get
+
+  patientHandler:
+    handler: api/patient/patientHandler.main
+    
+  providerHandler:
+    handler: api/provider/providerHandler.main
+
+# you can add CloudFormation resource templates here
+#resources:
+#  Resources:
+#    NewResource:
+#      Type: AWS::S3::Bucket
+#      Properties:
+#        BucketName: my-new-bucket
+#  Outputs:
+#     NewOutput:
+#       Description: "Description for the output"
+#       Value: "Some output value"

@@ -1,0 +1,21 @@
+{
+  "name": "etl-graphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "patientsHandler.js",
+  "scripts": {
+    "start:dev": "nodemon --ext js --exec npm run start-server",
+    "start-server": "serverless offline start --dontPrintOutput --skipCacheInvalidation --useSeparateProcesses",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-lambda": "^2.8.1",
+    "graphql": "^14.4.2",
+    "merge-graphql-schemas": "^1.7.0",
+    "serverless": "^1.49.0",
+    "serverless-offline": "^6.0.0-alpha.0"
+  }
+}
