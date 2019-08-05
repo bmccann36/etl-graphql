@@ -6,7 +6,8 @@ module.exports = gql`
   type Query {
     hello: String
     patient(id: ID!): Patient
-    provider(id: ID): Provider
+    provider(id: ID!): Provider
+    dentalRecord(id: ID!): DentalRecord
   }
   
   type Patient {
@@ -19,6 +20,12 @@ module.exports = gql`
   type Provider {
     id: ID!
     name: String
+  }
+  
+  type DentalRecord{
+    id: ID!
+    toothCondition: String
+    lastCheckUp: String
   }
   
 `;
