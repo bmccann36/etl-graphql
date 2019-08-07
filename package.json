@@ -19,7 +19,8 @@
     "serverless": "^1.49.0"
   },
   "devDependencies": {
-    "serverless-pseudo-parameters": "^2.4.0",
-    "serverless-offline": "^6.0.0-alpha.0"
+    "faker": "^4.1.0",
+    "serverless-offline": "^6.0.0-alpha.0",
+    "serverless-pseudo-parameters": "^2.4.0"
   }
 }
