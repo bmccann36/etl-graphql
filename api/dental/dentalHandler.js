@@ -25,6 +25,8 @@ async function getDentalById(id) {
 }
 
 async function getDentalByPatientId(patientId) {
+  console.log('got here!!!');
+  
   const params = {
     TableName: `DentalTable-${process.env.STAGE}`,
     IndexName: 'patientId-index',

@@ -9,7 +9,7 @@ const wrapLocalOrRemote = require('../../utils/wrapLocalOrRemote');
  * define how to reach out to the lambda function (this is what will always run in deployed code)
  */
 function callRemoteLambda(argsToLambda) {
-  console.log('invoking remote lambda');
+  console.log('invoking remote patient lambda');
   const params = {
     FunctionName: `etl-graphql-${process.env.STAGE}-patientHandler`,
     InvocationType: 'RequestResponse',

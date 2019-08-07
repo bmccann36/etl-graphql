@@ -16,7 +16,10 @@
     "apollo-server-lambda": "^2.8.1",
     "graphql": "^14.4.2",
     "merge-graphql-schemas": "^1.7.0",
-    "serverless": "^1.49.0",
+    "serverless": "^1.49.0"
+  },
+  "devDependencies": {
+    "serverless-pseudo-parameters": "^2.4.0",
     "serverless-offline": "^6.0.0-alpha.0"
   }
 }
