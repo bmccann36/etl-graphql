@@ -6,7 +6,7 @@ const wrapLocalOrRemote = require('../../utils/wrapLocalOrRemote');
 
 function callRemoteLambda(argsToHandler) {
   const params = {
-    FunctionName: 'etl-graphql-dev-providerHandler',
+    FunctionName: `etl-graphql-${process.env.STAGE}-providerHandler`,
     InvocationType: 'RequestResponse',
     Payload: JSON.stringify(argsToHandler),
   };
@@ -25,7 +25,7 @@ module.exports = {
     }
   },
   Patient: {
-    provider: (parent, args, ctx) => {
+    provider: (parent) => {
       return wrappedProviderFn(
         { id: parent.providerId }
       );

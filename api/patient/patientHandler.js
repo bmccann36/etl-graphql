@@ -1,12 +1,16 @@
 'use strict';
+const dynamo = require('aws-sdk/clients/dynamodb');
+const docClient = new dynamo.DocumentClient();
 
 module.exports.main = async (event) => {
 
-  console.log('hit patient handler lambda');
-  return {
-    id: '1',
-    name: 'Brian',
-    age: 32,
-    providerId: '1'
+  const params = {
+    TableName: `PatientTable-${process.env.STAGE}`,
+    Key: {
+      id: event.id,
+    }
   };
+
+  const dynamoRes = await docClient.get(params).promise(); 
+  return dynamoRes.Item;
 };

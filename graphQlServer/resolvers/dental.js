@@ -6,7 +6,7 @@ const wrapLocalOrRemote = require('../../utils/wrapLocalOrRemote');
 
 function callRemoteLambda(argsToHandler) {
   const params = {
-    FunctionName: 'etl-graphql-dev-dentalHandler',
+    FunctionName: `etl-graphql-${process.env.STAGE}-dentalHandler`,
     InvocationType: 'RequestResponse',
     Payload: JSON.stringify(argsToHandler),
   };
@@ -21,14 +21,14 @@ const wrappedDentalFn = wrapLocalOrRemote(localDentalApi.main, callRemoteLambda)
 module.exports = {
   Query: {
     dentalRecord: (parent, args) => {
-      return wrappedDentalFn({ id: args.id });
+      return wrappedDentalFn(args);
     }
   },
-  // Patient: {
-  //   dentalRecord: (parent, args, ctx) => {
-  //   return wrappedDentalFn(
-  //     { id: parent.providerId }
-  //   );
-  // }
-  // }
+  Patient: {
+    dentalRecord: (parent) => {
+      return wrappedDentalFn(
+        { patientId: parent.id }
+      );
+    }
+  }
 };

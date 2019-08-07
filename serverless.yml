@@ -9,6 +9,7 @@ custom:
 provider:
   name: aws
   runtime: nodejs8.10
+  stage: ${self:provider.environment.STAGE}
   environment: ${file(env.yml):${self:custom.env_src}}
   
 plugins:
@@ -41,15 +42,12 @@ functions:
     
   providerHandler:
     handler: api/provider/providerHandler.main
+    
+  dentalHandler:
+    handler: api/dental/dentalHandler.main
 
-# you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
-#  Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"
+resources: 
+  # dms tasks definitions
+  - ${file(./cfResources/patientTable.yml)}
+  - ${file(./cfResources/providerTable.yml)}
+  - ${file(./cfResources/dentalTable.yml)}

@@ -1,22 +1,18 @@
-module.exports.main = async (payload) => {
-  console.log('hit the provider handler');
-  console.log('payload :', payload);
-  // get provider by id
-  // todo figure out what properites I have and use them
-  return providersStub[payload.id];
-};
+'use strict';
+const dynamo = require('aws-sdk/clients/dynamodb');
+const docClient = new dynamo.DocumentClient();
 
 
+module.exports.main = async (event) => {
+  const params = {
+    TableName: `ProviderTable-${process.env.STAGE}`,
+    Key: {
+      id: event.id,
+    }
+  };
 
-const providersStub = {
-  1: {
-    id: '1',
-    name: 'Cigna'
-  },
-  2: {
-    id: '2',
-    name: 'MetroPlus'
-  }
+  const dynamoRes = await docClient.get(params).promise(); 
+  return dynamoRes.Item;
 };
 
 

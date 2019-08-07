@@ -4,6 +4,7 @@
   "description": "",
   "main": "patientsHandler.js",
   "scripts": {
+    "deploy": "sls deploy -v --env_src=deployed",
     "start:dev": "nodemon --ext js --exec npm run start-server",
     "start-server": "serverless offline start --dontPrintOutput --skipCacheInvalidation --useSeparateProcesses",
     "test": "echo \"Error: no test specified\" && exit 1"

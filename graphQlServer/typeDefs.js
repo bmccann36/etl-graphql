@@ -15,6 +15,7 @@ module.exports = gql`
     name: String
     age: Int
     provider: Provider
+    dentalRecord: DentalRecord
   }
   
   type Provider {
