@@ -27,6 +27,7 @@ module.exports = gql`
     id: ID!
     toothCondition: String
     lastCheckUp: String
+    patient: Patient
   }
   
 `;

@@ -9,6 +9,7 @@ custom:
   env_src: ${opt:env_src, 'default'}
   serverless-offline:
     port: 4000
+  region: us-east-1
   
 provider:
   name: aws
