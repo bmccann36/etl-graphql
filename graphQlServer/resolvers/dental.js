@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 const lambda = new AWS.Lambda({ region: process.env.AWS_REGION });
 
-const localDentalApi = require('../../api/dental/dentalHandler');
+const localDentalbackEndService = require('../../backEndService/dental/dentalHandler');
 const wrapLocalOrRemote = require('../../utils/wrapLocalOrRemote');
 
 function callRemoteLambda(argsToHandler) {
@@ -15,7 +15,7 @@ function callRemoteLambda(argsToHandler) {
   });
 }
 
-const wrappedDentalFn = wrapLocalOrRemote(localDentalApi.main, callRemoteLambda);
+const wrappedDentalFn = wrapLocalOrRemote(localDentalbackEndService.main, callRemoteLambda);
 
 
 module.exports = {

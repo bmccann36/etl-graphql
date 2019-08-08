@@ -40,17 +40,26 @@ functions:
     - http:
         path: graphql
         method: get
+        
+  dentalTableWatcher:
+    handler: changeDetector/dentalTableWatcher.main
+    events:
+      - stream:
+          type: dynamodb
+          batchSize: 1
+          arn: 
+            Fn::GetAtt: [ DentalTable, StreamArn ]
 
   patientHandler:
-    handler: api/patient/patientHandler.main
+    handler: backEndService/patient/patientHandler.main
     role: CallDynamoRole
     
   providerHandler:
-    handler: api/provider/providerHandler.main
+    handler: backEndService/provider/providerHandler.main
     role: CallDynamoRole
         
   dentalHandler:
-    handler: api/dental/dentalHandler.main
+    handler: backEndService/dental/dentalHandler.main
     role: CallDynamoRole
     
 resources: 

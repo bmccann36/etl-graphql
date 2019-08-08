@@ -1,7 +1,7 @@
 const AWS = require('aws-sdk');
 const lambda = new AWS.Lambda({ region: process.env.AWS_REGION });
 
-const localProviderApi = require('../../api/provider/providerHandler');
+const localProviderbackEndService = require('../../backEndService/provider/providerHandler');
 const wrapLocalOrRemote = require('../../utils/wrapLocalOrRemote');
 
 function callRemoteLambda(argsToHandler) {
@@ -15,7 +15,7 @@ function callRemoteLambda(argsToHandler) {
   });
 }
 
-const wrappedProviderFn = wrapLocalOrRemote(localProviderApi.main, callRemoteLambda);
+const wrappedProviderFn = wrapLocalOrRemote(localProviderbackEndService.main, callRemoteLambda);
 
 
 module.exports = {

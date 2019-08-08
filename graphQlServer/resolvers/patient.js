@@ -2,7 +2,7 @@
 const AWS = require('aws-sdk');
 const lambda = new AWS.Lambda({ region: process.env.USE_REGION });
 
-const localPatientApi = require('../../api/patient/patientHandler');
+const localPatientbackEndService = require('../../backEndService/patient/patientHandler');
 const wrapLocalOrRemote = require('../../utils/wrapLocalOrRemote');
 
 /**
@@ -21,7 +21,7 @@ function callRemoteLambda(argsToLambda) {
 }
 
 // wrap in higher order fn so resolver knows whether to call local or remote code 
-const wrappedPatientFn = wrapLocalOrRemote(localPatientApi.main, callRemoteLambda);
+const wrappedPatientFn = wrapLocalOrRemote(localPatientbackEndService.main, callRemoteLambda);
 
 module.exports = {
   Query: {
