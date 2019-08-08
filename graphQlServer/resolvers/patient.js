@@ -27,4 +27,7 @@ module.exports = {
   Query: {
     patient: async (root, args, ctx) => wrappedPatientFn(args)
   },
+  DentalRecord: {
+    patient: (parent) => wrappedPatientFn({ id: parent.patientId }),
+  }
 };
