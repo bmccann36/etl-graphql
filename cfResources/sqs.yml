@@ -1,0 +1,6 @@
+Resources:
+  SqsQueue:
+    Type: AWS::SQS::Queue
+    Properties: 
+      QueueName: etl-queue-${self:provider.environment.STAGE}
+    

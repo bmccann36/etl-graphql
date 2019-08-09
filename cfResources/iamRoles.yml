@@ -26,3 +26,41 @@ Resources:
                   - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/DentalTable-${self:provider.environment.STAGE}/*
                   - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/ProviderTable-${self:provider.environment.STAGE}
 
+              - Effect: "Allow"
+                Action: "logs:*"
+                Resource: "*"
+                
+  CallSqsRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - "lambda.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Policies:
+        - PolicyName: '#{AWS::StackName}-callSqsPolicy'
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action: 'sqs:*'
+                Resource:
+                  Fn::GetAtt: [ SqsQueue, Arn ]
+              - Effect: "Allow"
+                Action:
+                  - dynamodb:DescribeStream
+                  - dynamodb:ListStreams
+                  - dynamodb:GetShardIterator
+                  - dynamodb:GetRecords
+                Resource:
+                  - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/DentalTable-${self:provider.environment.STAGE}
+                  - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/DentalTable-${self:provider.environment.STAGE}/*
+
+              - Effect: "Allow"
+                Action: "logs:*"
+                Resource: "*"

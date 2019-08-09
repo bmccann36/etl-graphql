@@ -2,6 +2,7 @@
 const { AttributeValue } = require('dynamodb-data-types');
 const { fromDental } = require('../graphQlClient/queries');
 const execQuery = require('../graphQlClient/execQuery');
+const pushSqs = require('./pushSqs');
 
 module.exports.main = async (event) => {
   try {
@@ -22,7 +23,11 @@ module.exports.main = async (event) => {
       patient,
       dentalRecord,
     };
-    console.log(combinedData);
+    console.log('\n COMBINED DATA: \n', combinedData, '\n PUSHING TO SQS \n');
+    await pushSqs(JSON.stringify(combinedData));
+    console.log('push completed');
+    
+    
   } catch (err) {
     console.log(err);
   }

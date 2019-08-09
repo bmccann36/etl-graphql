@@ -44,6 +44,7 @@ functions:
         
   dentalTableWatcher:
     handler: changeDetector/dentalTableWatcher.main
+    role: CallSqsRole
     events:
       - stream:
           type: dynamodb
@@ -69,3 +70,4 @@ resources:
   - ${file(./cfResources/providerTable.yml)}
   - ${file(./cfResources/dentalTable.yml)}
   - ${file(./cfResources/iamRoles.yml)}
+  - ${file(./cfResources/sqs.yml)}
