@@ -1,4 +1,4 @@
-process.env.GRAPHQL_ENDPOINT = 'http://localhost:4000/graphql';
+process.env.GQL_LOCAL_URL = 'http://localhost:4000/graphql';
 process.env.SQS_QUEUE = 'https://sqs.us-east-1.amazonaws.com/466357709346/etl-queue-brian';
 
 const chai = require('chai');
