@@ -51,6 +51,16 @@ functions:
           batchSize: 100
           arn: 
             Fn::GetAtt: [ DentalTable, StreamArn ]
+            
+  patientTableWatcher:
+    handler: changeDetector/patientTableWatcher.main
+    role: CallSqsRole
+    events:
+      - stream:
+          type: dynamodb
+          batchSize: 100
+          arn: 
+            Fn::GetAtt: [ PatientTable, StreamArn ]
 
   patientHandler:
     handler: backEndService/patient/patientHandler.main

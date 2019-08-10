@@ -1,7 +1,7 @@
 const SQS = require('aws-sdk/clients/sqs');
 const sqs = new SQS();
 const uuidv1 = require('uuid/v1');
-
+const logger = require('../utils/getLogger')('pushSqsBatch');
 
 module.exports = async (msgArray) => {
   let pendingSends = [];
@@ -16,7 +16,7 @@ module.exports = async (msgArray) => {
     pendingSends.push(pendingBatch);
   }
   await Promise.all(pendingSends); // send all batches
-  console.log('success sending batch of: ', msgArray.length);
+  logger.log('info', `success sending batch of: ${msgArray.length}`);
 };
 
 function convertToEntries(objects) {

@@ -60,6 +60,8 @@ Resources:
                 Resource:
                   - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/DentalTable-${self:provider.environment.STAGE}
                   - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/DentalTable-${self:provider.environment.STAGE}/*
+                  - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/PatientTable-${self:provider.environment.STAGE}
+                  - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/PatientTable-${self:provider.environment.STAGE}/*
 
               - Effect: "Allow"
                 Action: "logs:*"

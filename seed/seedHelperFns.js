@@ -1,7 +1,4 @@
 const faker = require('faker');
-const batchWrite = require('./dynamoBatchWrite');
-
-
 
 module.exports = {
   createProviderBatch: function () {

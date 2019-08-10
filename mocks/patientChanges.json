@@ -1,0 +1,35 @@
+{
+  "Records": [{
+    "eventID": "d713d876f07d0dd83f02b37a24e25b19",
+    "eventName": "MODIFY",
+    "eventVersion": "1.1",
+    "eventSource": "aws:dynamodb",
+    "awsRegion": "us-east-1",
+    "dynamodb": {
+      "ApproximateCreationDateTime": 1565446183,
+      "Keys": {
+        "id": {
+          "S": "1088"
+        }
+      },
+      "NewImage": {
+        "providerId": {
+          "S": "38"
+        },
+        "name": {
+          "S": "Dr. Patricia Deckow"
+        },
+        "id": {
+          "S": "1088"
+        },
+        "age": {
+          "N": "49"
+        }
+      },
+      "SequenceNumber": "15003500000000028060061701",
+      "SizeBytes": 52,
+      "StreamViewType": "NEW_IMAGE"
+    },
+    "eventSourceARN": "arn:aws:dynamodb:us-east-1:466357709346:table/PatientTable-brian/stream/2019-08-07T10:22:11.173"
+  }]
+}
