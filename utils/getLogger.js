@@ -6,8 +6,8 @@ module.exports = function (serviceName) {
     level: process.env.LOG_LEVEL || 'info',
     format: format.combine(
       format.errors({ stack: true }),
-      // format.simple(),
-      format.json({space: 1}),
+      format.simple(),
+      // format.json({space: 1}),
       // format.colorize({ all: true }),
 
     ),

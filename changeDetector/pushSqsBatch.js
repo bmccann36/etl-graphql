@@ -16,7 +16,7 @@ module.exports = async (msgArray) => {
     pendingSends.push(pendingBatch);
   }
   await Promise.all(pendingSends); // send all batches
-  logger.log('info', `success sending batch of: ${msgArray.length}`);
+  logger.info(`\n success sending batch of: ${msgArray.length}`);
 };
 
 function convertToEntries(objects) {

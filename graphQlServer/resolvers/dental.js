@@ -1,10 +1,12 @@
 const AWS = require('aws-sdk');
 const lambda = new AWS.Lambda({ region: process.env.AWS_REGION });
+const logger = require('../../utils/getLogger')('dental resolver');
 
 const localDentalbackEndService = require('../../backEndService/dental/dentalHandler');
 const wrapLocalOrRemote = require('../../utils/wrapLocalOrRemote');
 
 function callRemoteLambda(argsToHandler) {
+  logger.info('INVOKING REMOTE DENTAL LAMBDA');
   const params = {
     FunctionName: `etl-graphql-${process.env.STAGE}-dentalHandler`,
     InvocationType: 'RequestResponse',

@@ -13,7 +13,7 @@ module.exports.main = async (event) => {
       pendingBatch.push(handlePatientItem(record));
     });
     const aggrResultsArr = await Promise.all(pendingBatch);
-    logger.log('info', `aggregated batch of ${aggrResultsArr.length} pushing to SQS`);
+    logger.info(`\n AGGREGATED BATCH OF ${aggrResultsArr.length} PUBLISHING TO SQS\n`);
     await pushSqsBatch(aggrResultsArr);
   } catch (err) {
     logger.error(err);
@@ -29,7 +29,13 @@ async function handlePatientItem(rawRowEvt) {
   const itemAttributes = AttributeValue.unwrap(rawRowEvt.dynamodb.NewImage);
   const patientId = itemAttributes.id;
 
+  logger.log('info', '\n HANDLING PATIENT DATA CHANGE EVENT\n');
+  logger.info(JSON.stringify(itemAttributes, null,2));
+
   const graphQlRes = await execQuery(fromPatient, { id: patientId });
+
+  logger.info('\n GOT RESPONSE FROM GQL SERVER\n ');
+  logger.info(JSON.stringify(graphQlRes, null, 2));
 
   // flatten out gql response into more friendly package
   const provider = Object.assign({},
@@ -49,7 +55,10 @@ async function handlePatientItem(rawRowEvt) {
     dentalRecord,
     patient,
   };
-  
+
+  logger.log('info', '\n FLATTENED RESPONSE: \n');
+  logger.info(JSON.stringify(finalRes, null, 2));
+
   return finalRes;
 
 }

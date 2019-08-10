@@ -1,48 +1,52 @@
 const faker = require('faker');
 
 module.exports = {
-  createProviderBatch: function () {
-    const prods = [];
-    for (let i = 1; i <= 50; i++) {
-      const prod = makeProvider(i.toString());
-      prods.push(prod);
-    }
-    return prods;
-  },
+  createProviderBatch,
+  createPatientBatch,
+  createDentalBatch,
+  makeDental,
+  makePatient,
+  getRandomInt,
+}
 
-  createPatientBatch: function (startId, endId) {
-    const batchSize = endId - startId + 1;
-    const arrayOfLength = [];
-    for (let i = startId; i <= endId; i++) {
-      arrayOfLength.push(i.toString());
-    }
-    const patIds = shuffle(arrayOfLength.slice(0, batchSize));
+function createProviderBatch() {
+  const prods = [];
+  for (let i = 1; i <= 50; i++) {
+    const prod = makeProvider(i.toString());
+    prods.push(prod);
+  }
+  return prods;
+}
 
-    const patients = arrayOfLength.map(() => {
-      return makePatient(patIds.pop(), getRandomInt(1, 50).toString());
-    });
-    return patients;
-  },
+function createPatientBatch(startId, endId) {
+  const batchSize = endId - startId + 1;
+  const arrayOfLength = [];
+  for (let i = startId; i <= endId; i++) {
+    arrayOfLength.push(i.toString());
+  }
+  const patIds = shuffle(arrayOfLength.slice(0, batchSize));
 
-  createDentalBatch: function (startId, endId) {
-    const batchSize = endId - startId + 1;
-    const arrayOfLength = [];
-    for (let i = startId; i <= endId; i++) {
-      arrayOfLength.push(i.toString());
-    }
-    const patIds = shuffle(arrayOfLength.slice(0, batchSize));
-    const dentalIds = shuffle(arrayOfLength.slice(0, batchSize));
+  const patients = arrayOfLength.map(() => {
+    return makePatient(patIds.pop(), getRandomInt(1, 50).toString());
+  });
+  return patients;
+}
 
-    const dentals = arrayOfLength.map(() => {
-      return makeDental(dentalIds.pop(), patIds.pop());
-    });
-    return dentals;
-  },
+function createDentalBatch(startId, endId) {
+  const batchSize = endId - startId + 1;
+  const arrayOfLength = [];
+  for (let i = startId; i <= endId; i++) {
+    arrayOfLength.push(i.toString());
+  }
+  const patIds = shuffle(arrayOfLength.slice(0, batchSize));
+  const dentalIds = shuffle(arrayOfLength.slice(0, batchSize));
 
+  const dentals = arrayOfLength.map(() => {
+    return makeDental(dentalIds.pop(), patIds.pop());
+  });
+  return dentals;
+}
 
-
-
-};
 
 function makeDental(dentalId, patientId) {
   const conditions = ['clean', 'rotten', 'plaquey', 'cavities'];

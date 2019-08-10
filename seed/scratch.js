@@ -10,8 +10,8 @@ const batchWrite = require('./dynamoBatchWrite');
     const batchEnd = i + 999;
     console.log('batchStart :', batchStart);
     console.log('batchEnd :', batchEnd);
-    const dentalBatch = createDentalBatch(batchStart, batchEnd);
-    await batchWrite(`DentalTable-${process.env.DEV_NAME}`, dentalBatch);
+    const patientBatch = createPatientBatch(batchStart, batchEnd);
+    await batchWrite(`PatientTable-${process.env.DEV_NAME}`, patientBatch);
     console.log('pausing');
     await sleep(3000);
 

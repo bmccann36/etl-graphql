@@ -1,6 +1,7 @@
 
 const AWS = require('aws-sdk');
 const lambda = new AWS.Lambda({ region: process.env.USE_REGION });
+const logger = require('../../utils/getLogger')('patient resolver');
 
 const localPatientbackEndService = require('../../backEndService/patient/patientHandler');
 const wrapLocalOrRemote = require('../../utils/wrapLocalOrRemote');
@@ -9,7 +10,7 @@ const wrapLocalOrRemote = require('../../utils/wrapLocalOrRemote');
  * define how to reach out to the lambda function (this is what will always run in deployed code)
  */
 function callRemoteLambda(argsToLambda) {
-  console.log('invoking remote patient lambda');
+  logger.info('INVOKING REMOTE PATIENT LAMBDA');
   const params = {
     FunctionName: `etl-graphql-${process.env.STAGE}-patientHandler`,
     InvocationType: 'RequestResponse',
