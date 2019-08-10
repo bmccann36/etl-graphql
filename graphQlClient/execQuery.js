@@ -16,7 +16,6 @@ const defaultOptions = {
     errorPolicy: 'all',
   },
 };
-console.log(endpoint);
 
 const client = new ApolloClient({
   link: createHttpLink({

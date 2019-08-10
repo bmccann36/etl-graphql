@@ -1,0 +1,103 @@
+{
+  "Records": [
+      {
+          "eventID": "e4637f55d850228c926078ed60544241",
+          "eventName": "MODIFY",
+          "eventVersion": "1.1",
+          "eventSource": "aws:dynamodb",
+          "awsRegion": "us-east-1",
+          "dynamodb": {
+              "ApproximateCreationDateTime": 1565402374,
+              "Keys": {
+                  "id": {
+                      "S": "6"
+                  }
+              },
+              "NewImage": {
+                  "lastCheckUp": {
+                      "S": "2019-01-05T03:58:14.744Z"
+                  },
+                  "patientId": {
+                      "S": "1"
+                  },
+                  "id": {
+                      "S": "6"
+                  },
+                  "toothCondition": {
+                      "S": "clean"
+                  }
+              },
+              "SequenceNumber": "12483700000000059293023692",
+              "SizeBytes": 70,
+              "StreamViewType": "NEW_IMAGE"
+          },
+          "eventSourceARN": "arn:aws:dynamodb:us-east-1:466357709346:table/DentalTable-brian/stream/2019-08-09T13:04:18.934"
+      },
+      {
+          "eventID": "e6d4bc0128ce6629441872abb4db05f5",
+          "eventName": "MODIFY",
+          "eventVersion": "1.1",
+          "eventSource": "aws:dynamodb",
+          "awsRegion": "us-east-1",
+          "dynamodb": {
+              "ApproximateCreationDateTime": 1565402374,
+              "Keys": {
+                  "id": {
+                      "S": "9"
+                  }
+              },
+              "NewImage": {
+                  "lastCheckUp": {
+                      "S": "2019-06-26T23:20:03.363Z"
+                  },
+                  "patientId": {
+                      "S": "6"
+                  },
+                  "id": {
+                      "S": "9"
+                  },
+                  "toothCondition": {
+                      "S": "cavities"
+                  }
+              },
+              "SequenceNumber": "12483800000000059293023693",
+              "SizeBytes": 73,
+              "StreamViewType": "NEW_IMAGE"
+          },
+          "eventSourceARN": "arn:aws:dynamodb:us-east-1:466357709346:table/DentalTable-brian/stream/2019-08-09T13:04:18.934"
+      },
+      {
+          "eventID": "cb457fca749660d44d169c6c33647a41",
+          "eventName": "MODIFY",
+          "eventVersion": "1.1",
+          "eventSource": "aws:dynamodb",
+          "awsRegion": "us-east-1",
+          "dynamodb": {
+              "ApproximateCreationDateTime": 1565402374,
+              "Keys": {
+                  "id": {
+                      "S": "1"
+                  }
+              },
+              "NewImage": {
+                  "lastCheckUp": {
+                      "S": "2018-10-13T02:48:36.212Z"
+                  },
+                  "patientId": {
+                      "S": "7"
+                  },
+                  "id": {
+                      "S": "1"
+                  },
+                  "toothCondition": {
+                      "S": "rotten"
+                  }
+              },
+              "SequenceNumber": "12483900000000059293023694",
+              "SizeBytes": 71,
+              "StreamViewType": "NEW_IMAGE"
+          },
+          "eventSourceARN": "arn:aws:dynamodb:us-east-1:466357709346:table/DentalTable-brian/stream/2019-08-09T13:04:18.934"
+      }
+  ]
+}

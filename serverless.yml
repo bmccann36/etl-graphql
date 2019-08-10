@@ -48,7 +48,7 @@ functions:
     events:
       - stream:
           type: dynamodb
-          batchSize: 1
+          batchSize: 100
           arn: 
             Fn::GetAtt: [ DentalTable, StreamArn ]
 

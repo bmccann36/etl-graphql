@@ -11,5 +11,12 @@ describe('dental watcher test invoke', () => {
 
     const mockEvt = require('../mocks/dataChange.json');
     dentalWatcher.main(mockEvt);
-  })
+  });
+  
+  it.only('works with multiple rows', () => {
+
+    const mockEvt = require('../mocks/multiRecord.json');
+    dentalWatcher.main(mockEvt);
+  });
+  
 })
