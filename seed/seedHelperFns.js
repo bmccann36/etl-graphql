@@ -1,4 +1,7 @@
 const faker = require('faker');
+const uuidv4 = require('uuid/v4');
+const dynamo = require('aws-sdk/clients/dynamodb');
+const docClient = new dynamo.DocumentClient();
 
 module.exports = {
   createProviderBatch,
@@ -7,7 +10,9 @@ module.exports = {
   makeDental,
   makePatient,
   getRandomInt,
-}
+  updatePatient,
+  updateDental,
+};
 
 function createProviderBatch() {
   const prods = [];
@@ -54,7 +59,8 @@ function makeDental(dentalId, patientId) {
     id: dentalId,
     lastCheckUp: faker.date.past().toISOString(),
     patientId: patientId,
-    toothCondition: conditions[getRandomInt(0, 3)]
+    toothCondition: conditions[getRandomInt(0, 3)],
+    data: uuidv4(),
   };
   return fake;
 }
@@ -73,11 +79,44 @@ function makePatient(patientId, providerId) {
     age: getRandomInt(1, 90),
     id: patientId,
     name: faker.name.findName(),
-    providerId: providerId
+    providerId: providerId,
+    data: uuidv4(),
   };
   return fake;
 }
+function updatePatient() {
+  const newName = uuidv4();
+  const idToChange = getRandomInt(1,10000).toString();
+  var params = {
+    TableName: `PatientTable-${process.env.DEV_NAME}`,
+    Key: { id: idToChange },
+    UpdateExpression: 'set #data = :data',
+    ExpressionAttributeNames: { '#data': 'data' },
+    ExpressionAttributeValues: {
+      ':data': newName,
+    }
+  };
+  // console.log('updating to: ', params);
+  return docClient.update(params).promise();
+}
 
+
+function updateDental(){
+  // const newLastCheckup = faker.date.past().toISOString();
+  const newDate = uuidv4();
+  const idToChange = getRandomInt(1,10000).toString();
+  var params = {
+    TableName: `DentalTable-${process.env.DEV_NAME}`,
+    Key: { id: idToChange },
+    UpdateExpression: 'set #data = :data',
+    ExpressionAttributeNames: { '#data': 'data' },    
+    ExpressionAttributeValues: {
+      ':data': newDate,
+    }
+  };
+  // console.log('updating to: ', params);
+  return docClient.update(params).promise();
+}
 
 function shuffle(a) {
   var j, x, i;

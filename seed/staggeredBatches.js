@@ -1,22 +1,28 @@
-const {createDentalBatch, createPatientBatch, createProviderBatch} = require('./seedHelperFns');
+const { createDentalBatch, createPatientBatch, createProviderBatch } = require('./seedHelperFns');
 const batchWrite = require('./dynamoBatchWrite');
+const { updatePatient, updateDental } = require('./seedHelperFns');
 
 
 
 (async () => {
-  
+
   for (let i = 1; i < 10000; i += 1000) {
     const batchStart = i;
     const batchEnd = i + 999;
     console.log('batchStart :', batchStart);
     console.log('batchEnd :', batchEnd);
-    const patientBatch = createPatientBatch(batchStart, batchEnd);
-    await batchWrite(`PatientTable-${process.env.DEV_NAME}`, patientBatch);
+    for (let i = batchStart; i <= batchEnd; i++) {
+      if (i % 2 == 0) {
+        updateDental();
+      } else {
+        updatePatient();
+      }
+    }
     console.log('pausing');
     await sleep(3000);
 
   }
-  
+
 })();
 
 
