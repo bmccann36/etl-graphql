@@ -10,7 +10,6 @@ module.exports.main = async (event) => {
       id: event.id,
     }
   };
-
   const dynamoRes = await docClient.get(params).promise(); 
   return dynamoRes.Item;
 };
