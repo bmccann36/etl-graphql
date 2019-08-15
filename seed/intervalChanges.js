@@ -1,6 +1,6 @@
 'use strict';
+require('dotenv').config();
 const { updateDental, updatePatient, getRandomInt } = require('./seedHelperFns');
-
 
 
 (async () => {

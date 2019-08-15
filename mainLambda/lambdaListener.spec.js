@@ -6,9 +6,9 @@ const lambdaListener = require('./lambdaListener');
 
 
 
-describe('test invoke main lambda',  () => {
-    it('works on one event', async () => {
-        const mockEvt = require('../mocks/dataChange.json');
-        await lambdaListener(mockEvt)
-    })
+describe('test invoke main lambda', () => {
+  it('works on one event', async () => {
+    const mockEvt = require('../mocks/dataChange.json');
+    await lambdaListener(mockEvt)
+  })
 })

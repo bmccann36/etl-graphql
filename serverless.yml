@@ -31,51 +31,65 @@ provider:
 
 functions:
 
-  graphQlHandler:
-    handler: graphQlServer/gqlHandler.main
-    events:
-    - http:
-        path: graphql
-        method: post
-        cors: true
-    - http:
-        path: graphql
-        method: get
-        
-  dentalTableWatcher:
-    handler: changeDetector/dentalTableWatcher.main
+  mainLambda:
+    handler: mainLambda/lambdaListener.main
     role: CallSqsRole
     events:
-      - stream:
-          type: dynamodb
-          batchSize: 100
-          arn: 
-            Fn::GetAtt: [ DentalTable, StreamArn ]
-            
-  patientTableWatcher:
-    handler: changeDetector/patientTableWatcher.main
-    role: CallSqsRole
-    events:
-      - stream:
-          type: dynamodb
-          batchSize: 100
-          arn: 
-            Fn::GetAtt: [ PatientTable, StreamArn ]
+    - stream:
+        type: dynamodb
+        batchSize: 500
+        arn: 
+          Fn::GetAtt: [ PatientTable, StreamArn ]
+    - stream:
+        type: dynamodb
+        batchSize: 500
+        arn: 
+          Fn::GetAtt: [ DentalTable, StreamArn ]
 
-  patientHandler:
-    handler: backEndService/patient/patientHandler.main
-    role: CallDynamoRole
-    
-  providerHandler:
-    handler: backEndService/provider/providerHandler.main
-    role: CallDynamoRole
+  # graphQlHandler:
+  #   handler: graphQlServer/gqlHandler.main
+  #   events:
+  #   - http:
+  #       path: graphql
+  #       method: post
+  #       cors: true
+  #   - http:
+  #       path: graphql
+  #       method: get
         
-  dentalHandler:
-    handler: backEndService/dental/dentalHandler.main
-    role: CallDynamoRole
+  # dentalTableWatcher:
+  #   handler: changeDetector/dentalTableWatcher.main
+  #   role: CallSqsRole
+  #   events:
+  #     - stream:
+  #         type: dynamodb
+  #         batchSize: 100
+  #         arn: 
+  #           Fn::GetAtt: [ DentalTable, StreamArn ]
+            
+  # patientTableWatcher:
+  #   handler: changeDetector/patientTableWatcher.main
+  #   role: CallSqsRole
+  #   events:
+  #     - stream:
+  #         type: dynamodb
+  #         batchSize: 100
+  #         arn: 
+  #           Fn::GetAtt: [ PatientTable, StreamArn ]
+
+  # patientHandler:
+  #   handler: backEndService/patient/patientHandler.main
+  #   role: CallDynamoRole
+    
+  # providerHandler:
+  #   handler: backEndService/provider/providerHandler.main
+  #   role: CallDynamoRole
+        
+  # dentalHandler:
+  #   handler: backEndService/dental/dentalHandler.main
+  #   role: CallDynamoRole
     
 resources: 
-  # dms tasks definitions
   - ${file(./cfResources/patientTable.yml)}
   - ${file(./cfResources/providerTable.yml)}
   - ${file(./cfResources/dentalTable.yml)}
