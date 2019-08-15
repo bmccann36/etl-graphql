@@ -86,7 +86,7 @@ function makePatient(patientId, providerId) {
 }
 function updatePatient() {
   const newName = uuidv4();
-  const idToChange = getRandomInt(1,10000).toString();
+  const idToChange = getRandomInt(1, 10000).toString();
   var params = {
     TableName: `PatientTable-${process.env.DEV_NAME}`,
     Key: { id: idToChange },
@@ -101,21 +101,21 @@ function updatePatient() {
 }
 
 
-function updateDental(){
+function updateDental() {
   // const newLastCheckup = faker.date.past().toISOString();
   const newDate = uuidv4();
-  const idToChange = getRandomInt(1,10000).toString();
+  const idToChange = getRandomInt(1, 10000).toString();
   var params = {
     TableName: `DentalTable-${process.env.DEV_NAME}`,
     Key: { id: idToChange },
     UpdateExpression: 'set #data = :data',
-    ExpressionAttributeNames: { '#data': 'data' },    
+    ExpressionAttributeNames: { '#data': 'data' },
     ExpressionAttributeValues: {
       ':data': newDate,
     }
   };
   // console.log('updating to: ', params);
-  return docClient.update(params).promise();
+  docClient.update(params).promise();
 }
 
 function shuffle(a) {

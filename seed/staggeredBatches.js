@@ -1,8 +1,5 @@
-const { createDentalBatch, createPatientBatch, createProviderBatch } = require('./seedHelperFns');
-const batchWrite = require('./dynamoBatchWrite');
+
 const { updatePatient, updateDental } = require('./seedHelperFns');
-
-
 
 (async () => {
 
